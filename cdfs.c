@@ -648,9 +648,15 @@ void cdfs_init()
 
   // Reactivate GD-ROM drive 
 
-  *((volatile unsigned long *)0xa05f74e4) = 0x1fffff;
-  for(p=0; p<0x200000/4; p++)
-    x = ((volatile unsigned long *)0xa0000000)[p];
+  if((*(unsigned short *)0xa0000000)==0xe6ff){
+    *((volatile unsigned long *)0xa05f74e4) = 0x3ff;
+    for(p=0; p<0x400/4; p++)
+      x = ((volatile unsigned long *)0xa0000000)[p];
+  }else{
+    *((volatile unsigned long *)0xa05f74e4) = 0x1fffff;
+    for(p=0; p<0x200000/4; p++)
+      x = ((volatile unsigned long *)0xa0000000)[p];
+  }
 
   /* Reset GD system functions */
 
