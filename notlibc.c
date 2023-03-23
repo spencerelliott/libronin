@@ -35,8 +35,8 @@ void exit(int rcode);
 /* Stuff needed to make the binary smaller (some 2Mb or so...)
    remember to link in libronin before libc and libgcc to avoid
    multiple definition conflicts. */
-static FILE _stderr;
-FILE *stderr = &_stderr;
+//static FILE _stderr;
+//FILE *stderr = &_stderr;
 #endif
 int atexit(void (*function)(void)){ return 0; }
 void abort()
@@ -83,6 +83,8 @@ int sprintf(char *str, const char *format, ...)
  {report("sprintf ignored\n");return 0;}
 int fprintf(FILE *stream,  const  char  *format, ...)
  {report("fprintf ignored\n");return -1;}
+int vfprintf ( FILE * stream, const char * format, va_list arg )
+ {report("vfprintf ignored\n");return -1;}
 int printf(const char  *format, ...){report("printf ignored\n");return -1;}
 int fputs( const char *s, FILE *stream ){report("fputs ignored\n"); return -1;}
 int __write(){report("__write ignored\n"); return -1;}
